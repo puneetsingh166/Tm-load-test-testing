@@ -1,7 +1,7 @@
 name: Setup of Master-Node
 on:
   push:
-    branches: [branchC]
+    branches: [branchA]
   pull_request:
     branches: [master]
 
