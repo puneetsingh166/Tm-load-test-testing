@@ -1,7 +1,5 @@
 name: Setup chain and apply tm load test
 on:
-  push:
-    branches: [branchA]
   pull_request:
     branches: [master]
 
