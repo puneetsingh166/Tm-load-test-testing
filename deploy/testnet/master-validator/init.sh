@@ -42,11 +42,6 @@ GRAVITY_GRPC_PORT="9090"
 
 # The host of ethereum node
 ETH_HOST="0.0.0.0"
-echo '{
-        "validator_name": "",
-        "chain_id": "",
-        "orchestrator_name": ""
-}' > $ONOMY_HOME/val_info.json
 
 # Switch sed command in the case of linux
 fsed() {
@@ -66,6 +61,12 @@ GRAVITY_GENESIS_COINS="1000000000000$STAKE_DENOM,1000000000000$NORMAL_DENOM"
 # Initialize the home directory and add some keys
 echo "Init test chain"
 $GRAVITY $GRAVITY_HOME_FLAG $GRAVITY_CHAINID_FLAG init $GRAVITY_NODE_NAME
+
+echo '{
+        "validator_name": "",
+        "chain_id": "",
+        "orchestrator_name": ""
+}' > $ONOMY_HOME/val_info.json
 
 echo "Set stake/mint demon to $STAKE_DENOM"
 fsed "s#\"stake\"#\"$STAKE_DENOM\"#g" $GRAVITY_HOME_CONFIG/genesis.json
