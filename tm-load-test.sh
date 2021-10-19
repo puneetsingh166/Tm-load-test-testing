@@ -9,4 +9,4 @@ my-cosmos-tester -c 1 -T 10 -r 10 -s 250 --broadcast-tx-method async --endpoints
 ssh -i testnet1.pem root@137.184.201.190
 sleep10
 docker rm -f cosmos_container
-docker rmi -f puneet166/new1
+docker rmi -f puneet166/cosmos-node
