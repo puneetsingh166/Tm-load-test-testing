@@ -1,4 +1,4 @@
-git clone https://github.com/puneetsingh166/cosmos.git
+git clone https://github.com/puneetsingh166/Tm-load-testing.git
 cd cosmos/customclient/my-cosmos-tester
 go build
 sudo cp my-cosmos-tester /usr/bin/my-cosmos-tester
