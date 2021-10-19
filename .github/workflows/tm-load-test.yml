@@ -39,8 +39,8 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push image on dockerhub
-        run: docker buildx build --tag  puneet166/cosmos-node:v-${{ steps.buildnumber.outputs.build_number }} --file  deploy/tm-load-test/Dockerfile --platform  linux/amd64 --push --progress  tty .
+#       - name: Build and push image on dockerhub
+#         run: docker buildx build --tag  puneet166/cosmos-node:v-${{ steps.buildnumber.outputs.build_number }} --file  deploy/tm-load-test/Dockerfile --platform  linux/amd64 --push --progress  tty .
 
       - name: Pull and set a chain.
         uses: garygrossgarten/github-action-ssh@release
