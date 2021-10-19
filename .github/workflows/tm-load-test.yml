@@ -33,13 +33,13 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-#       - name: Build and push master-cosmos-validator-node
-#         run: docker buildx build --tag  puneet166/new1 --file  deploy/single-node-runner-rinkeby/Dockerfile --platform  linux/amd64 --push --progress  tty .
+       - name: Build and push master-cosmos-validator-node
+         run: docker buildx build --tag  puneet166/new1 --file  deploy/tm-load-test/Dockerfile --platform  linux/amd64 --push --progress  tty .
 
       - name: Pull and start master node..
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: docker run hello-world && docker rm -f $(docker ps -a -q) && docker rmi -f $(docker images -q) && docker run --name cosmos_container -d -p 26656:26656 -p 26657:26657 -p 1317:1317 -p 9090:9090  puneet166/new1 /bin/sh -c "sleep infinity | bash /root/onomy/deploy/testnet/master-validator/init.sh"
+          command: docker run hello-world && docker rm -f $(docker ps -a -q) && docker rmi -f $(docker images -q) && docker run --name cosmos_container -d -p 26656:26656 -p 26657:26657 -p 1317:1317 -p 9090:9090  puneet166/new1 /bin/sh -c "sleep infinity"
           host: ${{ secrets.MASTER_COSMOS_NODE_HOST }}
           username: root
           password: ""
