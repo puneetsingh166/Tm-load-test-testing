@@ -8,7 +8,7 @@ on:
 
 jobs:
   amd64:
-    name: Setup of Master-Node
+    name: Setup Chain
     runs-on: ubuntu-latest
     if: github.ref != 'refs/heads/config'
 #     defaults: 
@@ -39,10 +39,10 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push master-cosmos-validator-node
+      - name: Build and push image on dockerhub
         run: docker buildx build --tag  puneet166/cosmos-node:v-${{ steps.buildnumber.outputs.build_number }} --file  deploy/tm-load-test/Dockerfile --platform  linux/amd64 --push --progress  tty .
 
-      - name: Pull and start master node..
+      - name: Pull and set a chain.
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: docker run hello-world && docker rm -f $(docker ps -a -q) && docker rmi -f $(docker images -q) && docker run --name cosmos_container -d -p 26656:26656 -p 26657:26657 -p 1317:1317 -p 9090:9090  puneet166/cosmos-node:v-${{ steps.buildnumber.outputs.build_number }} /bin/bash -c "sleep infinity | bash /root/home/master-validator/init.sh"
