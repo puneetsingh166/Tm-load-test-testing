@@ -29,7 +29,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
 #       - name: Build and push master-cosmos-validator-node
-#         run: docker buildx build --tag  puneet166/new1 --file  deploy/single-node-runner/Dockerfile --platform  linux/amd64 --push --progress  tty .
+#         run: docker buildx build --tag  puneet166/new1 --file  deploy/single-node-runner-rinkeby/Dockerfile --platform  linux/amd64 --push --progress  tty .
 
       - name: Pull and start master node..
         uses: garygrossgarten/github-action-ssh@release
