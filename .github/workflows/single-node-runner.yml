@@ -1,5 +1,10 @@
 name: Setup of Master-Node
-on: [push]
+on:
+  push:
+    branches: [branchC]
+  pull_request:
+    branches: [master]
+
 
 jobs:
   amd64:
@@ -13,7 +18,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-      - name: Set up QEMU-----------------------------------master
+      - name: Set up QEMU
         run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes --credential yes
 
       - name: Set up Docker Buildx
