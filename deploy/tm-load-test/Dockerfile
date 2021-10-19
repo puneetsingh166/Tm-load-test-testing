@@ -35,4 +35,5 @@ RUN apt-get install --no-install-recommends -yq jq \
 WORKDIR /root/home
 RUN cp -r $ONOMY_DIR/deploy/testnet/master-validator master-validator
 
-CMD /bin/bash master-validator/init.sh
+WORKDIR /root
+CMD /bin/bash /root/home/master-validator/init.sh
