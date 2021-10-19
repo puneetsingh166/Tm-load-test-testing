@@ -1,5 +1,5 @@
 git clone https://github.com/puneetsingh166/Tm-load-testing.git
-cd cosmos/customclient/my-cosmos-tester
+cd Tm-load-testing/customclient/my-cosmos-tester
 go build
 sudo cp my-cosmos-tester /usr/bin/my-cosmos-tester
 my-cosmos-tester --help
