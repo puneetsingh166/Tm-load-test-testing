@@ -53,6 +53,15 @@ jobs:
           
       - name: Run tm load test
         run: sudo bash tm-load-test.sh
+        
+      - name: Clean container and images
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: docker rm -f cosmos_container &&  docker rmi -f puneet166/cosmos-node:v-${{ steps.buildnumber.outputs.build_number }}
+          host: ${{ secrets.MASTER_COSMOS_NODE_HOST }}
+          username: root
+          password: ""
+          privateKey: ${{ secrets.PRIVATE_KEY}}
      
           
           
