@@ -45,8 +45,7 @@ jobs:
           
       - name: Run tm load test
         run: |
-          OLD_DEPLOYMENT_ID=$(sudo bash deploy/tm-load-test/tm-load-test.sh)
-          echo '::set-output name=OLD_DEPLOYMENT_ID::$OLD_DEPLOYMENT_ID'
+          echo '::set-output name=OLD_DEPLOYMENT_ID::$(sudo bash deploy/tm-load-test/tm-load-test.sh)'
         id: old-deployment-id
 
       - name: Echo logs of tm load test
