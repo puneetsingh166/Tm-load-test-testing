@@ -1,6 +1,6 @@
 echo "---------------------------------------------------------git checkout------------------------------------------------------------------------------------------------------"
 
-git clone -b branchA https://github.com/puneetsingh166/tm-load-test.git
+git clone  https://github.com/puneetsingh166/tm-load-test.git
 cd tm-load-test/customclient/my-cosmos-tester
 echo "---------------------------------------------------------creating tm-load-test binary---------------------------------------------------------------------------------------"
 go build
