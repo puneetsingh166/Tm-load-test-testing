@@ -6,7 +6,7 @@ on:
 
 jobs:
   amd64:
-    name: Setup Chain
+    name: Setup Chain.
     runs-on: ubuntu-latest
     if: github.ref != 'refs/heads/config'
     steps:
