@@ -1,7 +1,7 @@
 name: Setup chain and apply tm load test
 on:
   pull_request:
-    branches: [master]
+    branches: [dev]
 
 
 jobs:
