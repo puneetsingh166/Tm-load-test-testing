@@ -3,7 +3,7 @@ cd Tm-load-testing/customclient/my-cosmos-tester
 go build
 sudo cp my-cosmos-tester /usr/bin/my-cosmos-tester
 my-cosmos-tester --help
-sleep 30
+sleep 20
 curl http://137.184.201.190:26657
 echo "Run Master-slave client test case 1 with  -c 1 -T 20 -r 1000 -s 250"
 sudo bash master-slave-test1.sh
