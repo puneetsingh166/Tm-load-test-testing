@@ -44,13 +44,7 @@ jobs:
           privateKey: ${{ secrets.PRIVATE_KEY}}
           
       - name: Run tm load test
-        run: |
-          echo '::set-output name=OLD_DEPLOYMENT_ID::$(sudo bash deploy/tm-load-test/tm-load-test.sh)'
-        id: old-deployment-id
-
-      - name: Echo logs of tm load test
-        run: |
-          echo ${{ steps.old-deployment-id.outputs.OLD_DEPLOYMENT_ID }}
+        run: sudo bash deploy/tm-load-test/tm-load-test.sh
         
       - name: Clean container and images
         uses: garygrossgarten/github-action-ssh@release
