@@ -9,9 +9,6 @@ jobs:
     name: Setup Chain
     runs-on: ubuntu-latest
     if: github.ref != 'refs/heads/config'
-#     defaults: 
-#       run:
-#         working-directory: ./customclient/my-cosmos-tester
     steps:
       - name: checkout
         uses: actions/checkout@v2
@@ -21,9 +18,6 @@ jobs:
         uses: einaregilsson/build-number@v3
         with:
           token: ${{secrets.github_token}}
-
-      - name: Set up QEMU
-        run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes --credential yes
 
       - name: Set up Docker Buildx
         id: buildx
@@ -67,19 +61,4 @@ jobs:
   
           
     
-#       - name: checkout code from master
-#         uses: actions/checkout@master
-#       - name: build binary in ubuntu for tm-load-test(cosmos node)
-#         run: go build
-#       - name: set binary in ubuntu's enviroment 
-#         run: sudo cp my-cosmos-tester /usr/bin/my-cosmos-tester
-#       - name: Checking client exist or not 
-#         run: my-cosmos-tester --help
-#       - name: Access port
-#         run: curl http://137.184.201.190:26657
-#       - name: Run standalone client's command
-#         run: my-cosmos-tester -c 1 -T 10 -r 10 -s 250 --broadcast-tx-method async --endpoints ws://137.184.201.190:26657/websocket  --stats-output ./stats.csv 
-#       - name: Display logs of standlone load test
-#         run: cat stats.csv
-
        
