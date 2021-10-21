@@ -1,11 +1,12 @@
 IP=$1
-echo "---------------------------------------------------------git checkout------------------------------------------------------------------------------------------------------"
+# echo "---------------------------------------------------------git checkout------------------------------------------------------------------------------------------------------"
 
-git clone  https://github.com/puneetsingh166/tm-load-test.git
-cd tm-load-test/customclient/my-cosmos-tester
-echo "---------------------------------------------------------creating tm-load-test binary---------------------------------------------------------------------------------------"
-go build
+# git clone  https://github.com/puneetsingh166/tm-load-test.git
+# cd tm-load-test/customclient/my-cosmos-tester
+# echo "---------------------------------------------------------creating tm-load-test binary---------------------------------------------------------------------------------------"
+# go build
 echo "---------------------------------------------------------Set my-cosmos-tester as enviroment variable----------------------------------------------------------------------------"
+wget https://github.com/puneetsingh166/tm-load-test/blob/master/customclient/my-cosmos-tester/my-cosmos-tester
 sudo cp my-cosmos-tester /usr/bin/my-cosmos-tester
 my-cosmos-tester --help
 sleep 20
