@@ -6,7 +6,7 @@ IP=$1
 # echo "---------------------------------------------------------creating tm-load-test binary---------------------------------------------------------------------------------------"
 # go build
 echo "---------------------------------------------------------Set my-cosmos-tester as enviroment variable----------------------------------------------------------------------------"
-wget https://github.com/puneetsingh166/tm-load-test/blob/master/customclient/my-cosmos-tester/my-cosmos-tester
+sudo wget https://github.com/puneetsingh166/tm-load-test/blob/master/customclient/my-cosmos-tester/my-cosmos-tester
 sudo cp my-cosmos-tester /usr/bin/my-cosmos-tester
 my-cosmos-tester --help
 sleep 20
