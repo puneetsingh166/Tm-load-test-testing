@@ -37,14 +37,14 @@ jobs:
       - name: Pull and set a chain.
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: docker run hello-world && docker rm -f $(docker ps -a -q) && docker rmi -f $(docker images -q) && docker run --name cosmos_container -d -p 26656:26656 -p 26657:26657 -p 1317:1317 -p 9090:9090  puneet166/cosmos:v-${{ steps.buildnumber.outputs.build_number }} /bin/bash -c "sleep infinity | bash /root/home/master-validator/init.sh"
+          command: docker run --name cosmos_container -d -p 26656:26656 -p 26657:26657 -p 1317:1317 -p 9090:9090  puneet166/cosmos:v-${{ steps.buildnumber.outputs.build_number }} /bin/bash -c "sleep infinity | bash /root/home/master-validator/init.sh"
           host: ${{ secrets.MASTER_COSMOS_NODE_HOST }}
           username: root
           password: ""
           privateKey: ${{ secrets.PRIVATE_KEY}}
           
       - name: Run tm load test
-        run: sudo bash deploy/tm-load-test/tm-load-test.sh
+        run: sudo bash deploy/tm-load-test/tm-load-test.sh {{ secrets.MASTER_COSMOS_NODE_HOST }}
         
       - name: Clean container and images
         uses: garygrossgarten/github-action-ssh@release
