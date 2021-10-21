@@ -1,5 +1,4 @@
 IP=$1
-echo "$IP"
 echo "---------------------------------------------------------git checkout------------------------------------------------------------------------------------------------------"
 
 git clone  https://github.com/puneetsingh166/tm-load-test.git
@@ -16,15 +15,15 @@ curl http://$IP:26657
 echo "---------------------------------------------------------Run Master-slave client test case 1 with  -c 1 -T 20 -r 1000 -s 250----------------------------------------------------------------------------"
 
 
-sudo bash master-slave-test1.sh
+sudo bash master-slave-test1.sh $IP
 
 echo "---------------------------------------------------------Run Master-slave client test case 2 with   -c 1 -T 15 -r 200 -s 2500----------------------------------------------------------------------------"
 
 
-sudo bash master-slave-test2.sh
+sudo bash master-slave-test2.sh $IP
 echo "---------------------------------------------------------Run Master-slave client test case 3 with   -c 1 -T 10 -r 10 -s 310----------------------------------------------------------------------------"
 
-sudo bash master-slave-test3.sh
+sudo bash master-slave-test3.sh $IP
 
 echo "---------------------------------------------------------Display Master-slave client test case 1's logs with  -c 1 -T 20 -r 1000 -s 250----------------------------------------------------------------------------"
 cat logs.txt
