@@ -32,12 +32,12 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push image on dockerhub
-        run: docker buildx build --tag  puneet166/cosmos-node:v-${{ steps.buildnumber.outputs.build_number }} --file  deploy/tm-load-test/Dockerfile --platform  linux/amd64 --push --progress  tty .
+        run: docker buildx build --tag  cosmos-node:v-${{ steps.buildnumber.outputs.build_number }} --file  deploy/tm-load-test/Dockerfile --platform  linux/amd64 --push --progress  tty .
 
       - name: Pull and set a chain.
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: docker run hello-world && docker rm -f $(docker ps -a -q) && docker rmi -f $(docker images -q) && docker run --name cosmos_container -d -p 26656:26656 -p 26657:26657 -p 1317:1317 -p 9090:9090  puneet166/cosmos-node:v-${{ steps.buildnumber.outputs.build_number }} /bin/bash -c "sleep infinity | bash /root/home/master-validator/init.sh"
+          command: docker run hello-world && docker rm -f $(docker ps -a -q) && docker rmi -f $(docker images -q) && docker run --name cosmos_container -d -p 26656:26656 -p 26657:26657 -p 1317:1317 -p 9090:9090  cosmos-node:v-${{ steps.buildnumber.outputs.build_number }} /bin/bash -c "sleep infinity | bash /root/home/master-validator/init.sh"
           host: ${{ secrets.MASTER_COSMOS_NODE_HOST }}
           username: root
           password: ""
