@@ -5,8 +5,6 @@ time=$2
 rate=$3
 size=$4
 fileName=$5
-sleep 35
-sleep 40
 curl http://0.0.0.0:26657
 echo "--------------------------------------- test cases starting-----------------------------------------------------------"
 my-cosmos-tester master --expect-slaves 1 --bind localhost:26670 -c $connections -T $time -r $rate -s $size --broadcast-tx-method async --endpoints ws://0.0.0.0:26657/websocket &
