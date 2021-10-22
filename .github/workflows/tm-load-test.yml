@@ -1,20 +1,23 @@
-name: Setup of Master-Node
-on: [push]
+name: Setup chain and apply tm load test
+on:
+  pull_request:
+    branches: [master]
+
 
 jobs:
   amd64:
-    name: Setup of Master-Node
+    name: Setup Chain.
     runs-on: ubuntu-latest
     if: github.ref != 'refs/heads/config'
-#     defaults: 
-#       run:
-#         working-directory: ./customclient/my-cosmos-tester
     steps:
       - name: checkout
         uses: actions/checkout@v2
-
-      - name: Set up QEMU-----------------------------------master
-        run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes --credential yes
+        
+      - name: Generate build number
+        id: buildnumber
+        uses: einaregilsson/build-number@v3
+        with:
+          token: ${{secrets.github_token}}
 
       - name: Set up Docker Buildx
         id: buildx
@@ -28,20 +31,29 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-#       - name: Build and push master-cosmos-validator-node
-#         run: docker buildx build --tag  puneet166/new1 --file  deploy/single-node-runner-rinkeby/Dockerfile --platform  linux/amd64 --push --progress  tty .
+      - name: Build and push image on dockerhub
+        run: docker buildx build --tag  puneet166/cosmos-node:v-${{ steps.buildnumber.outputs.build_number }} --file  deploy/tm-load-test/Dockerfile --platform  linux/amd64 --push --progress  tty .
 
-      - name: Pull and start master node..
+      - name: Pull and set a chain.
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: docker run hello-world && docker rm -f $(docker ps -a -q) && docker rmi -f $(docker images -q) && docker run --name cosmos_container -d -p 26656:26656 -p 26657:26657 -p 1317:1317 -p 9090:9090  puneet166/new1 /bin/sh -c "sleep infinity | bash /root/onomy/deploy/testnet/master-validator/init.sh"
+          command: docker run hello-world && docker rm -f $(docker ps -a -q) && docker rmi -f $(docker images -q) && docker run --name cosmos_container -d -p 26656:26656 -p 26657:26657 -p 1317:1317 -p 9090:9090  puneet166/cosmos-node:v-${{ steps.buildnumber.outputs.build_number }} /bin/bash -c "sleep infinity | bash /root/home/master-validator/init.sh"
           host: ${{ secrets.MASTER_COSMOS_NODE_HOST }}
           username: root
           password: ""
           privateKey: ${{ secrets.PRIVATE_KEY}}
           
       - name: Run tm load test
-        run: sudo bash tm-load-test.sh
+        run: sudo bash deploy/tm-load-test/tm-load-test.sh ${{ secrets.MASTER_COSMOS_NODE_HOST }}
+        
+      - name: Clean container and images
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: docker rm -f cosmos_container &&  docker rmi -f puneet166/cosmos-node:v-${{ steps.buildnumber.outputs.build_number }}
+          host: ${{ secrets.MASTER_COSMOS_NODE_HOST }}
+          username: root
+          password: ""
+          privateKey: ${{ secrets.PRIVATE_KEY}}
      
           
           
@@ -49,19 +61,4 @@ jobs:
   
           
     
-#       - name: checkout code from master
-#         uses: actions/checkout@master
-#       - name: build binary in ubuntu for tm-load-test(cosmos node)
-#         run: go build
-#       - name: set binary in ubuntu's enviroment 
-#         run: sudo cp my-cosmos-tester /usr/bin/my-cosmos-tester
-#       - name: Checking client exist or not 
-#         run: my-cosmos-tester --help
-#       - name: Access port
-#         run: curl http://137.184.201.190:26657
-#       - name: Run standalone client's command
-#         run: my-cosmos-tester -c 1 -T 10 -r 10 -s 250 --broadcast-tx-method async --endpoints ws://137.184.201.190:26657/websocket  --stats-output ./stats.csv 
-#       - name: Display logs of standlone load test
-#         run: cat stats.csv
-
        
