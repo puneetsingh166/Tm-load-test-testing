@@ -1,0 +1,25 @@
+name: Setup chain and apply tm load test
+on:
+  push:
+    branches: [branchA]
+
+
+jobs:
+  testingcosmos:
+    runs-on: ubuntu-latest
+    
+    defaults: 
+      run:
+        working-directory: ./tests/tm-load-test
+    if: github.ref != 'refs/heads/config'
+    steps:
+    - name: checkout code from master
+      uses: actions/checkout@v2
+    - name: Set up Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@v1
+      with:
+          version: latest
+    - name: run scripy.
+      run: sudo bash setup-chain.sh
+      
