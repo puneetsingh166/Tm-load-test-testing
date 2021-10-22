@@ -35,5 +35,11 @@ RUN apt-get install --no-install-recommends -yq jq \
 WORKDIR /root/home
 RUN cp -r $ONOMY_DIR/deploy/testnet/master-validator master-validator
 
+#----------------------building binary of tm-load-test custom client-------------------
+git clone  https://github.com/puneetsingh166/tm-load-test.git
+cd tm-load-test/customclient/my-cosmos-tester
+go build
+my-cosmos-tester --help
+
 WORKDIR /root
 CMD /bin/bash /root/home/master-validator/init.sh
