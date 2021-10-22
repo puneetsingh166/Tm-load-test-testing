@@ -4,7 +4,7 @@ sudo bash buid-container.sh
 # docker build -t cosmos-chain .
 # the directory of this script, useful for allowing this script
 # to be run with any PWD
-# DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+#DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Remove existing container instance
 # set +e
@@ -12,7 +12,7 @@ sudo bash buid-container.sh
 # set -e
 
 
-# pushd $DIR/../
+#pushd $DIR/../
 
 # Run new test container instance
 # docker run --name cosmos_container --mount type=bind,source="$(pwd)"/,target=/onomy --cap-add=NET_ADMIN -p 9090:9090 -p 26657:26657 -p 1317:1317 -p 8545:8545 -it onomy-base /bin/bash /onomy/tests/gravity/container-scripts/reload-code.sh $NODES
@@ -38,5 +38,7 @@ pushd $DIR/../
 
 # Run new test container instance
 docker run -d --name cosmos_test_instance --mount type=bind,source="$(pwd)"/,target=/onomy --cap-add=NET_ADMIN -p 9090:9090 -p 26657:26657 -p 1317:1317 -p 8545:8545 -it cosmosbase /bin/bash -c "sleep infinity | bash /root/home/master-validator/init.sh"
-curl http://localhost:26657
-sudo bash run-load-test/master-slave-case.sh 1 15 200 2500 logs
+sleep 30
+curl http://0.0.0.0:26657
+echo "-------------------------------------------------------------------------------"
+#sudo bash run-load-test/master-slave.sh 1 15 200 2500 logs

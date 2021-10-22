@@ -48,3 +48,9 @@ RUN cp -r $ONOMY_DIR/deploy/testnet/master-validator master-validator
 
 WORKDIR /root
 CMD /bin/bash /root/home/master-validator/init.sh
+# ------------------------------------------------- Running load-test----------------------------
+RUN ls
+WORKDIR $ONOMY_DIR/tests/tm-load-test/run-load-test
+RUN ls
+RUN bash master-slave.sh 1 25 200 2500 logs
+ 

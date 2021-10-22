@@ -1,12 +1,14 @@
 #!/bin/bash
+sleep 35
 connections=$2
 time=$3
 rate=$4
 size=$5
 fileName=$6
+sleep 35
 curl http://0.0.0.0:26657
-
-my-cosmos-tester master --expect-slaves 1 --bind localhost:26670 -c $connections -T $time -r $rate -s $size --broadcast-tx-method async --endpoints ws://0.0.0.0:26657/websocket &
+echo "--------------------------------------- test cases starting-----------------------------------------------------------"
+my-cosmos-tester master --expect-slaves 1 --bind localhost:26670 -c 1 -T 20 -r 10000 -s 250 --broadcast-tx-method async --endpoints ws://0.0.0.0:26657/websocket &
 my-cosmos-tester slave --master ws://localhost:26670 &
 destdir=./$fileName.txt
 while true
@@ -24,3 +26,4 @@ fi
 done
 
 cat $fileName.txt
+echo "done"
