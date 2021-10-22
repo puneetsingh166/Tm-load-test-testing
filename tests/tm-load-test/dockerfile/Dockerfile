@@ -30,9 +30,7 @@ RUN make install
 RUN git clone  https://github.com/puneetsingh166/tm-load-test.git
 RUN ls
 WORKDIR tm-load-test/customclient/my-cosmos-tester
-RUN ls
 RUN go build
-RUN ls
 RUN cp my-cosmos-tester /usr/bin/my-cosmos-tester
 RUN my-cosmos-tester --help
 
@@ -48,9 +46,7 @@ RUN cp -r $ONOMY_DIR/deploy/testnet/master-validator master-validator
 
 WORKDIR /root
 CMD /bin/bash /root/home/master-validator/init.sh
-# ------------------------------------------------- Running load-test----------------------------
-RUN ls
+# ------------------------------------------------- run tm-load-test cases----------------------------
 WORKDIR $ONOMY_DIR/tests/tm-load-test/run-load-test
-RUN ls
 RUN bash master-slave.sh 1 25 200 2500 logs
  
