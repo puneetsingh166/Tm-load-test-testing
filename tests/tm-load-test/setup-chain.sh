@@ -2,10 +2,6 @@
 sudo bash buid-container.sh
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-#Remove existing container instance
-set +e
-docker rm -f cosmos_test_instance
-set -e
 pushd $DIR/../
 
 # Run new test container instance
