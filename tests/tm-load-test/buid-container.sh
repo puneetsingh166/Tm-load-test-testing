@@ -13,4 +13,5 @@ pushd $REPOFOLDER
 # Build base container
 git archive --format=tar.gz -o $DOCKERFOLDER/onomy.tar.gz --prefix=onomy/ HEAD
 pushd $DOCKERFOLDER
-docker build -t cosmosbase .
+cd ../../
+docker build --pull -f tests/tm-load-test/dockerfile/Dockerfile  -t cosmosbase .
