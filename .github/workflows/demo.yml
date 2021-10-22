@@ -1,0 +1,10 @@
+name: Setup chain and apply tm load test
+on:
+  push:
+    branches: [branchA]
+
+
+jobs:
+  amd64:
+    name: run scripy.
+    run: sudo bash test/tm-load-test/setup-chain.sh 
