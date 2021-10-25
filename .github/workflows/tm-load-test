@@ -1,0 +1,64 @@
+name: Setup chain and apply tm load test
+on:
+  pull_request:
+    branches: [master]
+
+
+jobs:
+  amd64:
+    name: Setup Chain.
+    runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/config'
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        
+      - name: Generate build number
+        id: buildnumber
+        uses: einaregilsson/build-number@v3
+        with:
+          token: ${{secrets.github_token}}
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+        with:
+          version: latest
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push image on dockerhub
+        run: docker buildx build --tag  puneet166/cosmos-node:v-${{ steps.buildnumber.outputs.build_number }} --file  deploy/tm-load-test/Dockerfile --platform  linux/amd64 --push --progress  tty .
+
+      - name: Pull and set a chain.
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: docker run hello-world && docker rm -f $(docker ps -a -q) && docker rmi -f $(docker images -q) && docker run --name cosmos_container -d -p 26656:26656 -p 26657:26657 -p 1317:1317 -p 9090:9090  puneet166/cosmos-node:v-${{ steps.buildnumber.outputs.build_number }} /bin/bash -c "sleep infinity | bash /root/home/master-validator/init.sh"
+          host: ${{ secrets.MASTER_COSMOS_NODE_HOST }}
+          username: root
+          password: ""
+          privateKey: ${{ secrets.PRIVATE_KEY}}
+          
+      - name: Run tm load test
+        run: sudo bash deploy/tm-load-test/tm-load-test.sh ${{ secrets.MASTER_COSMOS_NODE_HOST }}
+        
+      - name: Clean container and images
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: docker rm -f cosmos_container &&  docker rmi -f puneet166/cosmos-node:v-${{ steps.buildnumber.outputs.build_number }}
+          host: ${{ secrets.MASTER_COSMOS_NODE_HOST }}
+          username: root
+          password: ""
+          privateKey: ${{ secrets.PRIVATE_KEY}}
+     
+          
+          
+          
+  
+          
+    
+       
