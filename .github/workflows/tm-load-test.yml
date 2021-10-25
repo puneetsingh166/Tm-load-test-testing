@@ -10,8 +10,7 @@ jobs:
       - name: Run test-case first
         run:  sudo bash tests/tm-load-test/setup-chain.sh 1 20 1000 250 logs1.txt
       - name: Display test-case-1
-        run: cd tests |
-          ls |
+        run: cd tests && ls |
           cd target |
           ls
 #      - name: Display test-case-1 logs-
