@@ -46,8 +46,8 @@ WORKDIR /root/home
 RUN  cp -r $ONOMY_DIR/tests/tm-load-test/run-load-test run-load-test  
 
 
-WORKDIR /root
-CMD [/bin/bash /root/home/master-validator/init.sh,/bin/bash /root/home/run-load-test/master-slave.sh 1 25 200 2500 logs]
+#WORKDIR /root
+#CMD [/bin/bash /root/home/master-validator/init.sh,/bin/bash /root/home/run-load-test/master-slave.sh 1 25 200 2500 logs]
 # ------------------------------------------------- run tm-load-test cases----------------------------
 
 
