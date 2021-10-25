@@ -11,6 +11,14 @@ jobs:
         run: sudo bash tests/tm-load-test/setup-chain.sh 1 20 1000 250 logs1
       - name: current dir
         run: ls
+      - name: current dir
+        run: cd tests
+      - name: current dir
+        run: ls
+      - name: current dir
+        run: cd target
+      - name: current dir
+        run: ls
       - name: Display test-case-1 logs-
         run: cat tests/target/logs1.txt
   Test_case_2_with_connections-1_time-15_rate-200_size-2500_filename-logs2:
