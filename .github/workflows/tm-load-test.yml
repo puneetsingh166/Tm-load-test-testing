@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Run all up valset three
+      - name: Run all up valset third
         run: bash tests/tm-load-test/setup-chain.sh 1 10 10 310
 
     
