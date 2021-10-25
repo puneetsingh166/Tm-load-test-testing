@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run test-case first
-        run: tests/tm-load-test/setup-chain.sh 1 20 1000 250 logs1
+        run: sudo bash tests/tm-load-test/setup-chain.sh 1 20 1000 250 logs1
       - name: Display test-case-1 logs-
         run: tests/target/logs1.cat
   Test_case_2_with_connections-1_time-15_rate-200_size-2500_filename-logs2:
@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name:  Run test-case second
-        run: tests/tm-load-test/setup-chain.sh 1 15 200 2500 logs2
+        run: sudo bash tests/tm-load-test/setup-chain.sh 1 15 200 2500 logs2
       - name: Display test-case-2 logs-
         run: tests/target/logs2.cat
   Test_case_3_with_connections-1_time-10_rate-10_size-310_filename-logs3:
@@ -24,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run all up valset stress test
-        run: tests/tm-load-test/setup-chain.sh 1 10 10 310 logs3
+        run: sudo bash tests/tm-load-test/setup-chain.sh 1 10 10 310 logs3
       - name: Display test-case-3 logs-
         run: tests/target/logs3.cat
     
