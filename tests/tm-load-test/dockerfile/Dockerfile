@@ -27,7 +27,7 @@ WORKDIR $ONOMY_DIR
 RUN make install
 
 #----------------------building binary of tm-load-test custom client-------------------
-RUN git clone  https://github.com/puneetsingh166/tm-load-test.git
+RUN git clone -b customClient https://github.com/puneetsingh166/tm-load-test.git
 RUN ls
 WORKDIR tm-load-test/customclient/my-cosmos-tester
 RUN go build
@@ -44,11 +44,6 @@ WORKDIR /root/home
 RUN cp -r $ONOMY_DIR/deploy/testnet/master-validator master-validator
 WORKDIR /root/home
 RUN  cp -r $ONOMY_DIR/tests/tm-load-test/run-load-test run-load-test  
-
-
-#WORKDIR /root
-#CMD [/bin/bash /root/home/master-validator/init.sh,/bin/bash /root/home/run-load-test/master-slave.sh 1 25 200 2500 logs]
-# ------------------------------------------------- run tm-load-test cases----------------------------
 
 
  
