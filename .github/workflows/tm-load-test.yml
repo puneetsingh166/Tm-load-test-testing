@@ -8,9 +8,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run test-case first
-        run:  bash tests/tm-load-test/setup-chain.sh 1 20 1000 250 log.txt && cat tests/target/logs.txt
-#      - name: Display test-case-1 logs-
-#        run: cat tests/target/logs1.txt
+        run:  bash tests/tm-load-test/setup-chain.sh 1 20 1000 250 log.txt
+      - name: Display 1
+        run: cd tests/target && ls
+      - name: Display 2
+        run: cd tests/target && ls
+      - name: Display 3
+        run: cd tests/target && ls
+      - name: Display 4
+        run: cd tests/target && ls
+      - name: Display 5
+        run: cd tests/target && ls
 #  Test_case_2_with_connections-1_time-15_rate-200_size-2500_filename-logs2:
 #    runs-on: ubuntu-latest
 #    steps:

@@ -23,4 +23,6 @@ pushd $DIR/../
 docker run -d --name cosmos_test_instance -v "$(pwd)"/target:/root/logs -p 9090:9090 -p 26657:26657 -p 1317:1317 -it cosmoschain /bin/bash -c "sleep infinity | bash /root/home/master-validator/init.sh | bash /root/home/run-load-test/master-slave.sh $CONNECTIONS $TIME $RATE $SIZE $FILE_NAME"
 sleep $TIME
 echo "------------test log ---------------"
+echo "$(pwd)"
+echo "------------test log 1 ---------------"
 cat "$(pwd)"/target/$FILE_NAME
