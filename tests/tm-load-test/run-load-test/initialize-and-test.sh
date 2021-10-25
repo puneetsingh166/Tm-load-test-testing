@@ -7,7 +7,7 @@ SIZE=$4
 FILE_NAME=$5
 
 bash /root/home/master-validator/init.sh
-sleep 30
+sleep 40
 echo "-----------------Check chain stated or not---------------------"
 curl http://0.0.0.0:26657
 echo "-----------------Run the tests---------------------"
