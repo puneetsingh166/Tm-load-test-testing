@@ -10,7 +10,7 @@ Filename=$5
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 result=$( docker images -q cosmoschain )
 
-sudo bash buid-container.sh	
+sudo bash $DIR/buid-container.sh	
 # Remove existing container instance
 set +e
 docker rm -f cosmos_test_instance
