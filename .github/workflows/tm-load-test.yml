@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run test-case first
-        run:  tests/tm-load-test/setup-chain.sh 1 20 1000 250 logs1.txt
+        run:  sudo bash tests/tm-load-test/setup-chain.sh 1 20 1000 250 logs1.txt
       - name: Display test-case-1
         run: ls |
           cd tests |
