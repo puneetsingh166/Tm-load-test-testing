@@ -14,6 +14,7 @@ my-cosmos-tester master --expect-slaves 1 --bind localhost:26670 -c $CONNECTIONS
 my-cosmos-tester slave --master ws://localhost:26670 &
 LOG_FILE_PATH=/root/logs/$FILE_NAME
 rm -rf $LOG_FILE_PATH
+touch $LOG_FILE_PATH
 while true
 do
 sleep 1
